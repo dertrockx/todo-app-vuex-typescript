@@ -1,29 +1,73 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+    <div class="header">
+      Todo using VueJS, VueX, and TypeScript
+    </div>
+    <itemInput />
+    <itemList :items="items" />
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import HelloWorld from './components/HelloWorld.vue';
+import ItemList from "@/components/ItemList.vue";
+import ItemInput from "@/components/ItemInput.vue";
+
 
 @Component({
   components: {
-    HelloWorld,
-  },
+    itemList: ItemList,
+    itemInput: ItemInput
+  }
 })
-export default class App extends Vue {}
+export default class App extends Vue {
+
+
+}
 </script>
 
 <style lang="scss">
+// normalize
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-size: 10px;
+  padding: 2rem;
+}
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  text-align: center;
+  margin: auto;
+  width: calc( 80vw );
+  display: grid;
+  justify-items: center;
+  grid-template-columns: 1fr;
+  grid-row-gap: 2rem;
+  grid-template-areas:
+  "header"
+  "input"
+  "items";
 }
+.header {
+  font-size: 2.4rem;
+  font-family: sans-serif;
+  grid-area: header;
+}
+
+input {
+    font-size: 1.6rem;
+    border: 0;
+    border-bottom: .1rem solid #111;
+    background: #fff;
+    grid-area: input;
+    &[type=text]:focus {
+      border: 0;
+      border-bottom: .1rem solid #111;
+    }
+  }
 </style>
